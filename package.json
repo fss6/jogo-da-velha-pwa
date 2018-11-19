@@ -1,7 +1,7 @@
 {
   "name": "react-jogodavelha",
   "version": "0.1.0",
-  "homepage": "https://fss6.github.io/react-jogodavelha",
+  "homepage": "https://github.com/fss6/jogo-da-velha-pwa",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.5.1",
