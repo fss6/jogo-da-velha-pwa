@@ -37,16 +37,6 @@ export default class Game extends Component {
     });
   }
 
-  handleClick() {
-    let { currentSymbol } = this.props;
-    let { disabled } = this.state;
-    if (!disabled) {
-      this.setState({ symbol: currentSymbol, disabled: true }, function () {
-        this.props.boardActionNotify(this.props.index);
-      });
-    }
-  }
-
   render() {
     return (
       <div>
