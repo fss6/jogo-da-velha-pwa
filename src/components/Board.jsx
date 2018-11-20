@@ -20,60 +20,6 @@ export default class Board extends Component {
     ]
   }
 
-  reset = () => {
-    this.squares.forEach(square => {
-      square.instance.reset();
-    });
-    this.props.parentReset();
-  }
-  actionNotify = async (index) => {
-    let square = this.squares[index].instance
-    if (square.isClickable()) {
-      let { currentSymbol, gameActionNotify } = this.props;
-
-      await square.clicked();
-      await square.setSymbol(currentSymbol);
-
-      let headMessage = 'Vez de ' + (currentSymbol === 'X' ? 'O' : 'X');
-      let bodyMessage = 'Última jogada: ' + currentSymbol + ' quadrado [' + index + ']';
-      this.panel.setText(headMessage, bodyMessage)
-      let isWinner = this._checkRules();
-      gameActionNotify(isWinner);
-    }
-
-  }
-
-  _checkRules = () => {
-    let isWinner = false;
-    let { currentSymbol } = this.props;
-
-    const rules = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8], // linhas
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], // colunas
-      [0, 4, 8], [2, 4, 6] // diagonais
-    ];
-
-    rules.forEach(rule => {
-      let filteredSquares = this.squares.filter(function (square, index) {
-        return (rule.includes(index) && square.instance.getSymbol() === currentSymbol)
-      });
-
-      if ( filteredSquares.length >= 3 ) {
-        let squares = this.squares;
-        squares.forEach(square => {
-          square.instance.clicked();
-        });
-
-        filteredSquares.forEach(square => {
-          square.instance.setTextColor('green');
-        });
-
-        isWinner = true;
-      }
-    });
-    return isWinner;
-  }
-
   render() {
     return (
       <div>
@@ -83,15 +29,11 @@ export default class Board extends Component {
               <Square
                 key={index}
                 index={index}
-                style={square.style}
-                ref={instance => { this.squares[index].instance = instance }}
-                parentActionNotify={ index => this.actionNotify(index) } />
+                style={square.style} />
             ))}
           </GridList>
         </div>
-        <Panel
-          parentReset={() => this.reset()}
-          ref={instance => { this.panel = instance }} />
+        <Panel />
       </div>
     );
   }

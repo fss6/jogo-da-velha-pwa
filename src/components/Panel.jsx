@@ -15,15 +15,6 @@ export default class Panel extends Component {
     this.state = initialState;
   }
 
-  reset = () => {
-    this.setState(initialState, () => {});
-    this.props.parentReset();
-  }
-
-  setText = (headMessage, bodyMessage) => {
-    this.setState({ headMessage, bodyMessage })
-  }
-
   render() {
     return (
       <Paper elevation={5} style={styles.paper}>
@@ -36,8 +27,7 @@ export default class Panel extends Component {
         <div style={styles.container}>
           <Button
             variant="contained"
-            color="primary"
-            onClick={ () => this.reset() }>
+            color="primary">
             Resetar
           </Button>
         </div>

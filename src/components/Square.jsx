@@ -14,37 +14,12 @@ export default class Square extends Component {
     this.state = initialState;
   }
 
-  reset = () => {
-    this.setState(initialState);
-  }
-
-  isClickable = () => {
-    return this.state.clickable;
-  }
-
-  clicked = () => {
-    this.setState({ clickable: false }, () => { })
-  }
-
-  getSymbol = () => {
-    return this.state.symbol;
-  }
-
-  setTextColor = (textColor) => {
-    this.setState( { textColor: textColor }, () => {})
-  }
-
-  setSymbol = (symbol) => {
-    this.setState({ symbol: symbol }, () => { })
-  }
-
   render() {
     let { parentActionNotify, index } = this.props;
     return (
       <GridListTile
         cols={1}
-        style={this.props.style}
-        onClick={ () => parentActionNotify(index) }>
+        style={this.props.style} >
         <div style={ styles.symbol }>
           <h2 style={{ color: this.state.textColor }}>
             { this.state.symbol }
